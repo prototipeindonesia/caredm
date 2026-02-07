@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Input Manual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #A0AEC0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--white);
+            color: var(--navy);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close-btn {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        /* Input Utama */
+        .main-input-group {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .main-input-group label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .glucose-input-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .glucose-field {
+            width: 120px;
+            font-size: 3.5rem;
+            font-weight: 700;
+            border: none;
+            text-align: center;
+            color: var(--navy);
+            border-bottom: 3px solid var(--light-blue);
+            padding: 0;
+        }
+
+        .glucose-field:focus {
+            outline: none;
+            border-color: var(--navy);
+        }
+
+        /* Selection Groups */
+        .section-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .option-item {
+            padding: 12px;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option-item span {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .option-item p {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .option-item.active {
+            background-color: var(--navy);
+            border-color: var(--navy);
+            color: white;
+        }
+
+        /* Notes & Insulin */
+        .extra-input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--light-blue);
+            border: none;
+            border-radius: 15px;
+            font-family: inherit;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Submit Button */
+        .btn-save {
+            width: 100%;
+            padding: 1.2rem;
+            background-color: var(--navy);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 31, 63, 0.2);
+        }
+
+        .btn-save:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <a href="dashboard.html" class="close-btn">✕</a>
+            <h2 style="font-size: 1.1rem;">Tambah Log Baru</h2>
+            <div style="width: 20px;"></div> </div>
+
+        <form action="dashboard.html">
+            <div class="main-input-group">
+                <label>Kadar Glukosa</label>
+                <div class="glucose-input-wrapper">
+                    <input type="number" class="glucose-field" placeholder="000" required>
+                    <span style="font-weight: 600; color: var(--gray);">mg/dL</span>
+                </div>
+            </div>
+
+            <span class="section-label">Waktu Makan</span>
+            <div class="option-grid">
+                <div class="option-item active" onclick="toggleActive(this)">
+                    <span>🍳</span>
+                    <p>Sarapan</p>
+                </div>
+                <div class="option-item" onclick="toggleActive(this)">
+                    <span>🥗</span>
+                    <p>Makan Siang</p>
+                </div>
+                <div class="option-item" onclick="toggleActive(this)">
+                    <span>🍽️</span>
+                    <p>Makan Malam</p>
+                </div>
+            </div>
+
+            <span class="section-label">Dosis Insulin (Unit)</span>
+            <input type="number" class="extra-input" placeholder="0.0">
+
+            <span class="section-label">Catatan Tambahan</span>
+            <textarea class="extra-input" rows="3" placeholder="Contoh: Makan nasi merah, jalan kaki 15 menit..."></textarea>
+
+            <button type="submit" class="btn-save">Simpan Data</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleActive(element) {
+            const siblings = element.parentElement.querySelectorAll('.option-item');
+            siblings.forEach(s => s.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Animasi sukses sederhana bisa ditambahkan di sini
+            window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+</html>

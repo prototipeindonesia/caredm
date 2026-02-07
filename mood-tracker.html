@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Mood Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #A0AEC0;
+            --happy: #FFDC00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--navy); /* Latar gelap agar fokus ke konten putih */
+            color: var(--white);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Mood Selector */
+        .mood-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 3rem;
+        }
+
+        .mood-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .mood-emoji {
+            font-size: 3rem;
+            filter: grayscale(100%);
+            transition: 0.3s;
+        }
+
+        .mood-item.active .mood-emoji {
+            filter: grayscale(0%);
+            transform: scale(1.2);
+        }
+
+        .mood-item p {
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0.6;
+        }
+
+        .mood-item.active p {
+            opacity: 1;
+            color: var(--happy);
+        }
+
+        /* Input Area */
+        .note-area {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .note-area label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: none;
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Button */
+        .btn-save-mood {
+            padding: 1.2rem;
+            background-color: var(--white);
+            color: var(--navy);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: auto;
+        }
+
+        .btn-save-mood:active {
+            transform: scale(0.95);
+        }
+
+        .back-link {
+            margin-top: 1.5rem;
+            color: white;
+            opacity: 0.6;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Bagaimana perasaanmu?</h1>
+            <p>Mood Anda membantu AI menganalisis korelasi dengan gula darah.</p>
+        </div>
+
+        <div class="mood-selection">
+            <div class="mood-item" onclick="selectMood(this)">
+                <span class="mood-emoji">🤩</span>
+                <p>Sangat Baik</p>
+            </div>
+            <div class="mood-item active" onclick="selectMood(this)">
+                <span class="mood-emoji">😊</span>
+                <p>Senang</p>
+            </div>
+            <div class="mood-item" onclick="selectMood(this)">
+                <span class="mood-emoji">😐</span>
+                <p>Biasa Saja</p>
+            </div>
+            <div class="mood-item" onclick="selectMood(this)">
+                <span class="mood-emoji">😔</span>
+                <p>Sedih</p>
+            </div>
+            <div class="mood-item" onclick="selectMood(this)">
+                <span class="mood-emoji">😰</span>
+                <p>Cemas</p>
+            </div>
+            <div class="mood-item" onclick="selectMood(this)">
+                <span class="mood-emoji">😡</span>
+                <p>Marah</p>
+            </div>
+        </div>
+
+        <div class="note-area">
+            <label>Apa yang sedang Anda pikirkan? (Opsional)</label>
+            <textarea rows="3" placeholder="Ceritakan sedikit tentang harimu..."></textarea>
+        </div>
+
+        <button class="btn-save-mood" onclick="saveMood()">Simpan Mood</button>
+        <a href="dashboard.html" class="back-link">Nanti Saja</a>
+    </div>
+
+    <script>
+        function selectMood(element) {
+            const items = document.querySelectorAll('.mood-item');
+            items.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function saveMood() {
+            // Simulasi penyimpanan data
+            alert('Mood berhasil disimpan! AI sedang menganalisis data Anda.');
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

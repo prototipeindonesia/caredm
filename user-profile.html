@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Profil Pengguna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #7F8C8D;
+            --danger: #FF4136;
+            --success: #2ECC40;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--navy);
+            padding-bottom: 110px; /* Ruang ekstra untuk nav baru */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Profile Header */
+        .profile-card {
+            background: var(--navy);
+            border-radius: 30px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 31, 63, 0.2);
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.2);
+            object-fit: cover;
+            background: #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .edit-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--accent-blue);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            border: 2px solid var(--navy);
+        }
+
+        .profile-card h2 { font-size: 1.2rem; margin-bottom: 5px; }
+        .profile-card p { font-size: 0.8rem; opacity: 0.8; }
+
+        /* Menu List */
+        .menu-section { margin-bottom: 1.5rem; }
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray);
+            margin-left: 10px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .menu-item:active { transform: scale(0.98); background: #f9f9f9; }
+        .menu-info { display: flex; align-items: center; gap: 15px; }
+        .menu-icon { font-size: 1.2rem; width: 30px; text-align: center; }
+        .menu-text { font-size: 0.9rem; font-weight: 600; }
+        .chevron { color: #CBD5E0; font-weight: bold; }
+
+        /* Logout Button */
+        .logout-btn {
+            background: #FFEBEB;
+            color: var(--danger);
+            border: none;
+            padding: 1.2rem;
+            border-radius: 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* BOTTOM NAV (SESUAI DASHBOARD) */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px; background: white;
+            display: flex; justify-content: space-around; padding: 12px 0 25px 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.08); border-radius: 25px 25px 0 0; z-index: 100;
+        }
+
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #A0AEC0; font-size: 0.65rem; font-weight: 600; }
+        .nav-item.active { color: var(--navy); }
+        .nav-icon { font-size: 1.4rem; }
+        
+        .fab-container { position: relative; top: -35px; }
+        .fab-add {
+            width: 58px; height: 58px; background: var(--navy); color: white;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 1.8rem; box-shadow: 0 8px 20px rgba(0, 31, 63, 0.4); border: 4px solid var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-img-container">
+                <div class="profile-img">👤</div>
+                <div class="edit-badge">✏️</div>
+            </div>
+            <h2>Budi Setiawan</h2>
+            <p>Diabetes Type 2 • Sejak 2021</p>
+        </div>
+
+        <div class="menu-section">
+            <span class="section-title">Kesehatan & Data</span>
+            <a href="integrated-stats-report.html" class="menu-item">
+                <div class="menu-info">
+                    <span class="menu-icon">📉</span>
+                    <span class="menu-text">Laporan Statistik Terpadu</span>
+                </div>
+                <span class="chevron">›</span>
+            </a>
+            <a href="manual-input-data.html" class="menu-item">
+                <div class="menu-info">
+                    <span class="menu-icon">📝</span>
+                    <span class="menu-text">Riwayat Input Data</span>
+                </div>
+                <span class="chevron">›</span>
+            </a>
+        </div>
+
+        <div class="menu-section">
+            <span class="section-title">Pengaturan Akun</span>
+            <a href="caregiver-link.html" class="menu-item">
+                <div class="menu-info">
+                    <span class="menu-icon">👪</span>
+                    <span class="menu-text">Manajemen Pendamping</span>
+                </div>
+                <span class="chevron">›</span>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-info">
+                    <span class="menu-icon">🔔</span>
+                    <span class="menu-text">Notifikasi & Pengingat</span>
+                </div>
+                <span class="chevron">›</span>
+            </a>
+        </div>
+
+        <button class="logout-btn" onclick="window.location.href='logout-notification.html'">
+            <span>🚪</span> Keluar dari Akun
+        </button>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Beranda</span>
+        </a>
+        <a href="ai-diabetes-dashboard.html" class="nav-item">
+            <span class="nav-icon">📊</span>
+            <span>Analisis</span>
+        </a>
+        <a href="manual-input-data.html" class="nav-item fab-container">
+            <div class="fab-add">+</div>
+        </a>
+        <a href="therapy-recommendations.html" class="nav-item">
+            <span class="nav-icon">🧘</span>
+            <span>Terapi</span>
+        </a>
+        <a href="user-profile.html" class="nav-item active">
+            <span class="nav-icon">👤</span>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+</body>
+</html>

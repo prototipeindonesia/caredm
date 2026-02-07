@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Guided Micro-Therapy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --soft-teal: #E0F2F1;
+            --teal: #4DB6AC;
+            --gray: #7F8C8D;
+            --bg-gradient: linear-gradient(180deg, #E0F2F1 0%, #FFFFFF 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--navy);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Nav Header */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        /* Therapy Player Visual */
+        .player-visual {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .album-art {
+            width: 220px;
+            height: 220px;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(77, 182, 172, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .album-art::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--teal);
+            border-radius: 40px;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .therapy-info h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .therapy-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Controls */
+        .controls {
+            padding: 2rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #E0E0E0;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .progress-fill {
+            width: 35%;
+            height: 100%;
+            background: var(--teal);
+            border-radius: 10px;
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .buttons-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .play-btn {
+            width: 70px;
+            height: 70px;
+            background: var(--navy);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 31, 63, 0.3);
+        }
+
+        .side-btn {
+            font-size: 1.2rem;
+            color: var(--navy);
+            opacity: 0.6;
+        }
+
+        /* Playlist Mini */
+        .playlist-mini {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 25px 25px 0 0;
+            margin: 0 -1.5rem -1.5rem -1.5rem;
+        }
+
+        .playlist-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .playlist-item span { font-size: 0.85rem; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-header">
+            <a href="therapy-recommendations.html" class="back-btn">←</a>
+            <span style="font-weight: 600; font-size: 0.9rem;">Sesi Relaksasi</span>
+            <span style="font-size: 1.2rem;">✨</span>
+        </div>
+
+        <div class="player-visual">
+            <div class="album-art">🍃</div>
+            <div class="therapy-info">
+                <h2 id="title">Deep Forest Breath</h2>
+                <p>Guided Meditation • 5 Menit</p>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="time-info">
+                <span>01:45</span>
+                <span>05:00</span>
+            </div>
+
+            <div class="buttons-row">
+                <span class="side-btn">⏮</span>
+                <div class="play-btn">⏸</div>
+                <span class="side-btn">⏭</span>
+            </div>
+        </div>
+
+        <div class="playlist-mini">
+            <p style="font-size: 0.8rem; font-weight: 700; color: var(--gray); margin-bottom: 10px;">ANTREAN TERAPI</p>
+            <div class="playlist-item">
+                <span>🌊 Ocean Calm Soundscape</span>
+                <span style="color: var(--teal); font-size: 0.7rem;">Saran AI</span>
+            </div>
+            <div class="playlist-item">
+                <span>🧘 Peregangan Otot Ringan</span>
+                <span style="color: var(--gray); font-size: 0.7rem;">3 Menit</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

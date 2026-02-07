@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Keluar Akun</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --gray: #7F8C8D;
+            --danger: #FF4136;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--navy);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 31, 63, 0.1);
+        }
+
+        .icon-container {
+            width: 80px;
+            height: 80px;
+            background: #FFEBEB;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 1rem;
+            border-radius: 15px;
+            font-family: 'Poppins';
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .btn-logout {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-cancel {
+            background: var(--light-blue);
+            color: var(--navy);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .footer-note {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="icon-container">👋</div>
+        
+        <h2>Ingin Keluar?</h2>
+        <p>Terima kasih sudah menjaga kesehatan hari ini. Pastikan sinkronisasi data selesai sebelum Anda keluar.</p>
+
+        <div class="btn-group">
+            <button class="btn btn-logout" onclick="performLogout()">Ya, Keluar Sekarang</button>
+            <a href="user-profile.html" class="btn btn-cancel">Batal</a>
+        </div>
+
+        <div class="footer-note">
+            Sesi Anda akan berakhir secara otomatis dalam 24 jam demi keamanan data.
+        </div>
+    </div>
+
+    <script>
+        function performLogout() {
+            // Simulasi proses logout
+            const btn = document.querySelector('.btn-logout');
+            btn.innerText = "Mengakhiri Sesi...";
+            btn.style.opacity = "0.7";
+            
+            setTimeout(() => {
+                alert('Anda telah keluar dengan aman.');
+                // Ganti 'index.html' dengan halaman awal aplikasi Anda
+                window.location.href = 'index.html'; 
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

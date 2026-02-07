@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Caregiver Link</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #7F8C8D;
+            --orange: #FF851B;
+            --green: #2ECC40;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--navy);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Nav Header */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        /* Connection Hero */
+        .hero-care {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 24px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .hero-care img {
+            width: 120px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-care h2 { font-size: 1.1rem; margin-bottom: 8px; }
+        .hero-care p { font-size: 0.8rem; color: var(--gray); line-height: 1.4; }
+
+        /* Caregiver List */
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .care-card {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .care-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .care-avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--light-blue);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .care-name h4 { font-size: 0.9rem; font-weight: 700; }
+        .care-name p { font-size: 0.7rem; color: var(--green); font-weight: 600; }
+
+        .access-toggle {
+            color: var(--accent-blue);
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Add New Button */
+        .btn-add-care {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--navy);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* Security Info */
+        .security-note {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(0, 116, 217, 0.05);
+            border-radius: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .security-note span { font-size: 1.2rem; }
+        .security-note p { font-size: 0.7rem; color: var(--gray); line-height: 1.4; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-header">
+            <a href="therapy-recommendations.html" class="back-btn">←</a>
+            <h2 style="font-size: 1.1rem;">Hubungkan Pendamping</h2>
+        </div>
+
+        <div class="hero-care">
+            <span style="font-size: 3.5rem; display: block; margin-bottom: 10px;">🛡️</span>
+            <h2>Anda Tidak Sendirian</h2>
+            <p>Berikan akses kepada keluarga untuk memantau tren glukosa dan menerima peringatan darurat secara real-time.</p>
+        </div>
+
+        <span class="section-label">Terhubung (2)</span>
+        
+        <div class="care-card">
+            <div class="care-info">
+                <div class="care-avatar">👩</div>
+                <div class="care-name">
+                    <h4>Siti Aminah</h4>
+                    <p>Istri • Online</p>
+                </div>
+            </div>
+            <div class="access-toggle">Izin: Penuh</div>
+        </div>
+
+        <div class="care-card">
+            <div class="care-info">
+                <div class="care-avatar">👨‍⚕️</div>
+                <div class="care-name">
+                    <h4>dr. Aris, Sp.PD</h4>
+                    <p>Dokter • Update 2j lalu</p>
+                </div>
+            </div>
+            <div class="access-toggle">Izin: Data Saja</div>
+        </div>
+
+        <button class="btn-add-care" onclick="alert('Membuka Kamera untuk Scan QR atau Masukkan Email')">
+            <span>➕</span> Tambah Pendamping Baru
+        </button>
+
+        <div class="security-note">
+            <span>🔒</span>
+            <p>Data medis Anda dienkripsi end-to-end. Anda dapat mencabut akses pendamping kapan saja melalui pengaturan profil.</p>
+        </div>
+    </div>
+
+</body>
+</html>

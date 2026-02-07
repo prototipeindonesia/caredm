@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Peer Support</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #7F8C8D;
+            --indigo: #3949AB;
+            --soft-indigo: #E8EAF6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--navy);
+            padding-bottom: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Header */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        /* Tabs */
+        .community-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            background: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: var(--navy);
+            color: white;
+        }
+
+        /* Create Post */
+        .create-post {
+            background: white;
+            padding: 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--soft-indigo);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .input-mock {
+            flex: 1;
+            background: var(--light-blue);
+            padding: 10px 15px;
+            border-radius: 12px;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* Forum Post Card */
+        .post-card {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 20px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .user-meta h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .user-meta span {
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+
+        .badge-mentor {
+            background: var(--soft-indigo);
+            color: var(--indigo);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .post-content {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .post-footer {
+            display: flex;
+            gap: 1.5rem;
+            border-top: 1px solid #F0F0F0;
+            padding-top: 10px;
+        }
+
+        .action-item {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        /* Floating Action Button for New Post */
+        .fab-post {
+            position: fixed;
+            bottom: 30px;
+            right: calc(50% - 210px); /* Adjust based on max-width */
+            width: 50px;
+            height: 50px;
+            background: var(--accent-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 116, 217, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-header">
+            <a href="therapy-recommendations.html" class="back-btn">←</a>
+            <h2 style="font-size: 1.1rem;">Komunitas Teman Sehat</h2>
+        </div>
+
+        <div class="community-tabs">
+            <div class="tab active">Terbaru</div>
+            <div class="tab">Tips Diet</div>
+            <div class="tab">Tanya Ahli</div>
+        </div>
+
+        <div class="create-post">
+            <div class="avatar">👤</div>
+            <div class="input-mock">Bagikan cerita Anda hari ini...</div>
+        </div>
+
+        <div class="post-card">
+            <div class="post-header">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <div class="avatar">👩‍⚕️</div>
+                    <div class="user-meta">
+                        <h4>Dr. Sarah (Nutrisionis)</h4>
+                        <span>2 jam yang lalu</span>
+                    </div>
+                </div>
+                <span class="badge-mentor">Mentor</span>
+            </div>
+            <div class="post-content">
+                Tips hari ini: Mengganti nasi putih dengan quinoa atau nasi merah terbukti menjaga grafik glukosa tetap "datar" setelah makan siang. Ada yang sudah coba?
+            </div>
+            <div class="post-footer">
+                <div class="action-item">❤️ 24</div>
+                <div class="action-item">💬 12 Komentar</div>
+            </div>
+        </div>
+
+        <div class="post-card">
+            <div class="post-header">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <div class="avatar">👨‍🦳</div>
+                    <div class="user-meta">
+                        <h4>Pak Budi</h4>
+                        <span>5 jam yang lalu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="post-content">
+                Alhamdulillah, setelah rutin mengikuti latihan napas di aplikasi CARE-DM, gula darah puasa saya lebih stabil di angka 100. Semangat semuanya!
+            </div>
+            <div class="post-footer">
+                <div class="action-item">❤️ 56</div>
+                <div class="action-item">💬 5 Komentar</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="fab-post">✍️</div>
+
+</body>
+</html>

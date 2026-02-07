@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Real-Time Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --danger: #FF4136;
+            --success: #2ECC40;
+            --gray: #7F8C8D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--white);
+            color: var(--navy);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Nav Header */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        /* Current Glucose Display */
+        .current-status {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .current-status h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .current-status span {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        .trend-indicator {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: #E8F5E9;
+            color: var(--success);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* Chart Container */
+        .chart-card {
+            background: var(--light-blue);
+            padding: 1rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        /* Filter Tabs */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+            background: #F4F7F6;
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .tab {
+            padding: 8px 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .tab.active {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        /* Insight List */
+        .insight-section h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 15px;
+            margin-bottom: 0.8rem;
+        }
+
+        .insight-icon {
+            font-size: 1.5rem;
+        }
+
+        .insight-text p {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .insight-text span {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-header">
+            <a href="dashboard.html" class="back-btn">←</a>
+            <h2 style="font-size: 1.1rem;">Detail Glukosa</h2>
+        </div>
+
+        <div class="current-status">
+            <span>Saat Ini (Real-Time)</span>
+            <h1>110 <span>mg/dL</span></h1>
+            <div class="trend-indicator">↘ Stabil</div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab">2 Jam</div>
+            <div class="tab active">Hari Ini</div>
+            <div class="tab">Minggu</div>
+        </div>
+
+        <div class="chart-card">
+            <canvas id="glucoseChart"></canvas>
+        </div>
+
+        <div class="insight-section">
+            <h3>Insight Hari Ini</h3>
+            
+            <div class="insight-item">
+                <div class="insight-icon">🎯</div>
+                <div class="insight-text">
+                    <p>Dalam Target Range</p>
+                    <span>92% dari waktu hari ini</span>
+                </div>
+            </div>
+
+            <div class="insight-item">
+                <div class="insight-icon">🥗</div>
+                <div class="insight-text">
+                    <p>Setelah Makan Siang</p>
+                    <span>Puncak tertinggi: 145 mg/dL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inisialisasi Chart.js
+        const ctx = document.getElementById('glucoseChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'],
+                datasets: [{
+                    label: 'mg/dL',
+                    data: [105, 120, 145, 110, 102, 110],
+                    borderColor: '#001F3F',
+                    backgroundColor: 'rgba(0, 31, 63, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#001F3F',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { display: false }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

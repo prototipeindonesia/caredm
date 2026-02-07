@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Laporan Statistik Terpadu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #7F8C8D;
+            --purple: #6133E4;
+            --teal: #4DB6AC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--white);
+            color: var(--navy);
+            padding-bottom: 40px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Nav Header */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn { text-decoration: none; font-size: 1.2rem; color: var(--navy); }
+        .share-btn { font-size: 0.8rem; font-weight: 700; color: var(--accent-blue); cursor: pointer; }
+
+        /* Report Header */
+        .report-meta {
+            background: var(--light-blue);
+            padding: 1.2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .report-meta h1 { font-size: 1.2rem; margin-bottom: 5px; }
+        .report-meta p { font-size: 0.75rem; color: var(--gray); }
+
+        /* Summary Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            border: 1px solid #EEE;
+            padding: 1rem;
+            border-radius: 18px;
+        }
+
+        .stat-card small { font-size: 0.7rem; color: var(--gray); display: block; margin-bottom: 5px; }
+        .stat-card span { font-size: 1.2rem; font-weight: 700; }
+
+        /* Chart Section */
+        .chart-container {
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Correlation Insights */
+        .insight-box {
+            background: #F8F9FF;
+            border-left: 4px solid var(--purple);
+            padding: 1rem;
+            border-radius: 0 15px 15px 0;
+            margin-bottom: 2rem;
+        }
+
+        .insight-box h4 { font-size: 0.85rem; margin-bottom: 5px; color: var(--purple); }
+        .insight-box p { font-size: 0.75rem; line-height: 1.4; color: #444; }
+
+        /* Action Buttons */
+        .btn-download {
+            width: 100%;
+            padding: 1rem;
+            background: var(--navy);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-family: 'Poppins';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-header">
+            <a href="user-profile.html" class="back-btn">✕</a>
+            <span style="font-weight: 700;">Laporan Medis</span>
+            <span class="share-btn">Kirim Dokter</span>
+        </div>
+
+        <div class="report-meta">
+            <h1>Ringkasan 30 Hari</h1>
+            <p>Periode: 1 Jan 2026 - 31 Jan 2026</p>
+        </div>
+
+        <div class="summary-grid">
+            <div class="stat-card">
+                <small>Rata-rata Glukosa</small>
+                <span>112 <small style="display:inline; font-size: 0.6rem;">mg/dL</small></span>
+            </div>
+            <div class="stat-card">
+                <small>Stabilitas Mood</small>
+                <span style="color: var(--teal);">Baik 😊</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">
+                <span>Tren Glukosa vs Stres</span>
+                <span style="font-size: 0.7rem; color: var(--gray);">Januari 2026</span>
+            </div>
+            <canvas id="integratedChart" height="220"></canvas>
+        </div>
+
+        <div class="insight-box">
+            <h4>🧠 Korelasi AI-Psikosomatik</h4>
+            <p>Sistem menemukan bahwa 80% lonjakan glukosa Anda terjadi setelah data menunjukkan tingkat stres tinggi. Relaksasi mikro sangat efektif menurunkan kadar gula darah Anda.</p>
+        </div>
+
+        <button class="btn-download" onclick="alert('Laporan PDF sedang dibuat...')">
+            <span>📥</span> Unduh Laporan (PDF)
+        </button>
+        
+        <p style="text-align: center; font-size: 0.65rem; color: var(--gray); margin-top: 1.5rem;">
+            Data ini dienkripsi dan divalidasi oleh CARE-DM AI Engine.
+        </p>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('integratedChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['M1', 'M2', 'M3', 'M4'],
+                datasets: [
+                    {
+                        label: 'Glukosa',
+                        data: [105, 125, 110, 108],
+                        borderColor: '#001F3F',
+                        backgroundColor: 'rgba(0, 31, 63, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Stres',
+                        data: [20, 70, 30, 25],
+                        borderColor: '#6133E4',
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+                scales: {
+                    y: { display: false },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

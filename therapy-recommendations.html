@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Pusat Terapi & Dukungan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #7F8C8D;
+            --teal: #4DB6AC;
+            --orange: #FF851B;
+            --indigo: #3949AB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--navy);
+            padding-bottom: 100px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Recommendation Cards */
+        .therapy-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .therapy-card:active {
+            transform: scale(0.98);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .info-box h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .info-box p {
+            font-size: 0.75rem;
+            color: var(--gray);
+            line-height: 1.3;
+        }
+
+        /* Color Variations */
+        .bg-teal { background-color: #E0F2F1; color: var(--teal); }
+        .bg-indigo { background-color: #E8EAF6; color: var(--indigo); }
+        .bg-orange { background-color: #FFF3E0; color: var(--orange); }
+
+        /* Featured Section */
+        .featured-ai {
+            background: var(--navy);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-ai h2 { font-size: 1rem; margin-bottom: 0.5rem; }
+        .featured-ai p { font-size: 0.75rem; opacity: 0.8; }
+        .featured-ai .sparkle { position: absolute; right: 15px; top: 15px; font-size: 1.5rem; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px; background: white;
+            display: flex; justify-content: space-around; padding: 12px 0 25px 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.08); border-radius: 25px 25px 0 0; z-index: 100;
+        }
+
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #A0AEC0; font-size: 0.65rem; font-weight: 600; }
+        .nav-item.active { color: var(--navy); }
+        .nav-icon { font-size: 1.4rem; }
+        .fab-container { position: relative; top: -35px; }
+        .fab-add {
+            width: 58px; height: 58px; background: var(--navy); color: white;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 1.8rem; border: 4px solid var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Pusat Terapi</h1>
+            <p>Rekomendasi bantuan fisik dan mental untuk Anda.</p>
+        </div>
+
+        <div class="featured-ai">
+            <span class="sparkle">✨</span>
+            <h2>Saran Terapi AI</h2>
+            <p>Berdasarkan mood Anda hari ini, meditasi suara 5 menit dapat membantu menstabilkan detak jantung.</p>
+        </div>
+
+        <a href="guided-micro-therapy.html" class="therapy-card">
+            <div class="icon-box bg-teal">🧘</div>
+            <div class="info-box">
+                <h3>Guided Micro-Therapy</h3>
+                <p>Terapi singkat berbasis suara & video untuk relaksasi instan.</p>
+            </div>
+        </a>
+
+        <a href="peer-support-community.html" class="therapy-card">
+            <div class="icon-box bg-indigo">🤝</div>
+            <div class="info-box">
+                <h3>Peer Support</h3>
+                <p>Terhubung dengan komunitas yang memahami perjalanan Anda.</p>
+            </div>
+        </a>
+
+        <a href="caregiver-link.html" class="therapy-card">
+            <div class="icon-box bg-orange">👪</div>
+            <div class="info-box">
+                <h3>Caregiver Link</h3>
+                <p>Bagikan data dan hubungkan akun dengan keluarga atau perawat.</p>
+            </div>
+        </a>
+
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Beranda</span>
+        </a>
+        <a href="ai-diabetes-dashboard.html" class="nav-item">
+            <span class="nav-icon">📊</span>
+            <span>Analisis</span>
+        </a>
+        <a href="manual-input-data.html" class="nav-item fab-container">
+            <div class="fab-add">+</div>
+        </a>
+        <a href="therapy-recommendations.html" class="nav-item active">
+            <span class="nav-icon">🧘</span>
+            <span>Terapi</span>
+        </a>
+        <a href="user-profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+</body>
+</html>

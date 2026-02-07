@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Riwayat Aktivitas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #A0AEC0;
+            --line-color: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--navy);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Nav Header */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        .date-selector {
+            background: var(--white);
+            padding: 10px 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Timeline Container */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        /* Garis vertikal tengah */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: var(--line-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Titik pada garis */
+        .timeline-dot {
+            position: absolute;
+            left: -30px;
+            width: 16px;
+            height: 16px;
+            background: var(--navy);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            z-index: 2;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .timeline-time {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .timeline-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .timeline-desc {
+            font-size: 0.8rem;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+
+        /* Warna Ikon khusus */
+        .dot-glucose { background: var(--navy); }
+        .dot-meal { background: #FF851B; }
+        .dot-exercise { background: #2ECC40; }
+        .dot-mood { background: #F012BE; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-header">
+            <a href="dashboard.html" class="back-btn">←</a>
+            <h2 style="font-size: 1.1rem;">Timeline Aktivitas</h2>
+        </div>
+
+        <div class="date-selector">
+            <span>‹</span>
+            <span>Hari Ini, 7 Feb 2026</span>
+            <span>›</span>
+        </div>
+
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="timeline-dot dot-glucose"></div>
+                <div class="timeline-content">
+                    <span class="timeline-time">18:30</span>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Cek Gula Darah</span>
+                        <span class="timeline-value">110 mg/dL</span>
+                    </div>
+                    <p class="timeline-desc">Stabil setelah aktivitas sore.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot dot-mood"></div>
+                <div class="timeline-content">
+                    <span class="timeline-time">17:45</span>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Input Mood</span>
+                        <span class="timeline-value">😊 Senang</span>
+                    </div>
+                    <p class="timeline-desc">Merasa segar setelah beristirahat sejenak.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot dot-exercise"></div>
+                <div class="timeline-content">
+                    <span class="timeline-time">16:00</span>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Olahraga</span>
+                        <span class="timeline-value">30 Menit</span>
+                    </div>
+                    <p class="timeline-desc">Jalan santai di sekitar komplek rumah.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot dot-meal"></div>
+                <div class="timeline-content">
+                    <span class="timeline-time">13:00</span>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Makan Siang</span>
+                        <span class="timeline-value">Salad & Ayam</span>
+                    </div>
+                    <p class="timeline-desc">Karbohidrat rendah, insulin 4 unit.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

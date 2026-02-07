@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | AI Insights & Alert</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --success: #2ECC40;
+            --gray: #7F8C8D;
+            --purple: #6133E4;
+            --danger: #FF4136;
+            --soft-teal: #E0F2F1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--navy);
+            padding-bottom: 90px;
+            overflow-x: hidden;
+        }
+
+        /* MODAL ALERT (DISTRESS DETECTION) */
+        #distressModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--danger);
+            z-index: 9999;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+        }
+
+        .alert-icon { font-size: 4rem; margin-bottom: 1rem; }
+        
+        .status-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin: 1.5rem 0;
+            border: 2px solid white;
+        }
+
+        .glucose-value { font-size: 3.5rem; font-weight: 800; }
+
+        .btn-emergency {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            color: var(--danger);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-dismiss {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* MAIN CONTENT STYLES */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .ai-header { margin-bottom: 1.5rem; }
+        .ai-header h2 { font-size: 1.3rem; font-weight: 700; }
+        .ai-header p { font-size: 0.85rem; color: var(--gray); }
+
+        .ai-insight-card {
+            background: linear-gradient(135deg, var(--purple), var(--accent-blue));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 24px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(97, 51, 228, 0.2);
+        }
+
+        .ai-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .chart-section {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .chart-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 1rem; display: block; }
+
+        .score-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .score-box { background: white; padding: 1.2rem; border-radius: 20px; text-align: center; }
+        .score-circle {
+            width: 60px; height: 60px; border: 5px solid var(--light-blue);
+            border-top-color: var(--success); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 10px; font-weight: 700;
+        }
+
+        /* Mental Health Quick Access */
+        .mental-health-card {
+            background: var(--white);
+            padding: 1.2rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--teal, #4DB6AC);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px; background: white;
+            display: flex; justify-content: space-around; padding: 12px 0 25px 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.08); border-radius: 25px 25px 0 0; z-index: 100;
+        }
+
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #A0AEC0; font-size: 0.65rem; font-weight: 600; }
+        .nav-item.active { color: var(--navy); }
+        .nav-icon { font-size: 1.4rem; }
+        .fab-container { position: relative; top: -35px; }
+        .fab-add {
+            width: 58px; height: 58px; background: var(--navy); color: white;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 1.8rem; box-shadow: 0 8px 20px rgba(0, 31, 63, 0.4); border: 4px solid var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="distressModal">
+        <div class="modal-content">
+            <div class="alert-icon">⚠️</div>
+            <h2>BAHAYA: HIPOGLIKEMIA</h2>
+            <div class="status-box">
+                <p>Kadar Gula Darah</p>
+                <div class="glucose-value">58</div>
+                <p>mg/dL</p>
+            </div>
+            <p style="margin-bottom: 2rem; font-size: 0.9rem;">Segera konsumsi 15g gula cepat serap. Mari tenangkan diri sejenak.</p>
+            
+            <button class="btn-emergency" onclick="alert('Menghubungi Kontak Darurat...')">📞 Hubungi Keluarga</button>
+            <button class="btn-emergency btn-dismiss" onclick="window.location.href='mental-health-feedback.html'">Saya Sudah Aman & Relaksasi</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="ai-header">
+            <h2>Analisis AI</h2>
+            <p>Data kesehatan Anda selama 30 hari terakhir.</p>
+        </div>
+
+        <div class="ai-insight-card">
+            <span class="ai-badge">Saran AI Hari Ini</span>
+            <h3>Stabilitas Meningkat!</h3>
+            <p>Glukosa puasa Anda stabil di angka 95-105 mg/dL. Pertahankan pola makan serat tinggi.</p>
+        </div>
+
+        <a href="mental-health-feedback.html" class="mental-health-card">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 1.5rem;">🧘‍♂️</span>
+                <div>
+                    <p style="font-weight: 700; font-size: 0.85rem;">Cek Kesehatan Mental</p>
+                    <p style="font-size: 0.7rem; color: var(--gray);">Latihan napas & feedback mood</p>
+                </div>
+            </div>
+            <span style="color: var(--gray);">›</span>
+        </a>
+
+        <div class="chart-section">
+            <span class="chart-title">Tren Glukosa Mingguan</span>
+            <canvas id="weeklyChart" height="200"></canvas>
+        </div>
+
+        <div class="score-row">
+            <div class="score-box">
+                <div class="score-circle">88%</div>
+                <span class="score-label">Time in Range</span>
+            </div>
+            <div class="score-box">
+                <div class="score-circle" style="border-top-color: var(--accent-blue);">6.4</div>
+                <span class="score-label">Est. HbA1c</span>
+            </div>
+        </div>
+
+        <div class="chart-section" onclick="window.location.href='adaptive-lifestyle-insight.html'" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.2rem;">🥗</span>
+                <span style="font-size: 0.85rem; font-weight: 600;">Lihat Rekomendasi Diet AI</span>
+            </div>
+            <span style="color: var(--gray);">›</span>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Beranda</span>
+        </a>
+        <a href="ai-diabetes-dashboard.html" class="nav-item active">
+            <span class="nav-icon">📊</span>
+            <span>Analisis</span>
+        </a>
+        <a href="manual-input-data.html" class="nav-item fab-container">
+            <div class="fab-add">+</div>
+        </a>
+        <a href="therapy-recommendations.html" class="nav-item">
+            <span class="nav-icon">🧘</span>
+            <span>Terapi</span>
+        </a>
+        <a href="user-profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+    <script>
+        // Chart.js Setup
+        const ctx = document.getElementById('weeklyChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                datasets: [{
+                    label: 'mg/dL',
+                    data: [110, 105, 125, 98, 102, 115, 108],
+                    backgroundColor: '#001F3F',
+                    borderRadius: 8,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: false, grid: { display: false } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

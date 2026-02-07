@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Registrasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #E7F0F8;
+            --accent-blue: #0074D9;
+            --gray: #A0AEC0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--white);
+            color: var(--navy);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 1.5rem; /* Sedikit dikurangi agar lebih lega di layar kecil */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: var(--light-blue);
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--navy);
+            border-radius: 10px;
+            width: 50%;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Header */
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* PERBAIKAN: Konsistensi Input & Select */
+        input, select, textarea {
+            width: 100%;
+            height: 50px; /* Tinggi statis agar sejajar sempurna */
+            padding: 0 1rem;
+            border-radius: 12px;
+            border: 1.5px solid #E2E8F0;
+            background-color: #F8FAFC;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--navy);
+            display: block;
+        }
+
+        textarea {
+            height: auto;
+            padding: 1rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--navy);
+            background-color: var(--white);
+        }
+
+        /* PERBAIKAN: Flexbox Row */
+        .row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end; /* Memastikan label sejajar secara horizontal */
+        }
+
+        .row .form-group {
+            flex: 1; /* Memberikan porsi lebar yang sama (50:50) */
+            min-width: 0; /* Mencegah overflow pada mobile */
+        }
+
+        /* Custom Arrow untuk Select agar tidak berantakan di Android/iOS */
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23001F3F' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        /* Radio Group / Health History */
+        .health-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .option-card {
+            border: 1.5px solid #E2E8F0;
+            padding: 12px 5px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option-card.active {
+            border-color: var(--navy);
+            background-color: var(--navy);
+            color: white;
+        }
+
+        /* Button */
+        .btn-next {
+            margin-top: 1rem;
+            padding: 1.1rem;
+            background-color: var(--navy);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 31, 63, 0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-next:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="progress-container">
+            <span class="step-label">Langkah 1 dari 2: Profil Medis</span>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1>Lengkapi Profil</h1>
+            <p>Bantu AI kami memberikan saran yang lebih akurat untuk Anda.</p>
+        </div>
+
+        <form action="device-sync.html">
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" placeholder="Masukkan nama Anda" required>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Usia</label>
+                    <input type="number" placeholder="Contoh: 45" required>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <select required>
+                        <option value="" disabled selected>Pilih...</option>
+                        <option value="pria">Pria</option>
+                        <option value="wanita">Wanita</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Tipe Diabetes</label>
+                <div class="health-options">
+                    <div class="option-card active" onclick="selectOption(this)">Tipe 1</div>
+                    <div class="option-card" onclick="selectOption(this)">Tipe 2</div>
+                    <div class="option-card" onclick="selectOption(this)">Gestasional</div>
+                    <div class="option-card" onclick="selectOption(this)">Pra-Diabetes</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan Riwayat (Opsional)</label>
+                <textarea rows="3" placeholder="Alergi obat atau kondisi lainnya..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-next">Lanjutkan</button>
+        </form>
+    </div>
+
+    <script>
+        function selectOption(element) {
+            const options = document.querySelectorAll('.option-card');
+            options.forEach(o => o.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            window.location.href = 'device-sync.html';
+        });
+    </script>
+</body>
+</html>

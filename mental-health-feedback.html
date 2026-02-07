@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | AI Diabetes Insights & Mind</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --success: #2ECC40;
+            --gray: #7F8C8D;
+            --purple: #6133E4;
+            --teal: #4DB6AC;
+            --soft-teal: #E0F2F1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--navy);
+            padding-bottom: 100px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .section-header {
+            margin: 1.5rem 0 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- AI DATA CARDS --- */
+        .ai-insight-card {
+            background: linear-gradient(135deg, var(--purple), var(--accent-blue));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 24px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(97, 51, 228, 0.2);
+        }
+
+        .ai-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .chart-section {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .score-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .score-box { background: white; padding: 1.2rem; border-radius: 20px; text-align: center; }
+        .score-circle {
+            width: 55px; height: 55px; border: 5px solid var(--light-blue);
+            border-top-color: var(--success); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 10px; font-weight: 700;
+        }
+
+        /* --- MENTAL HEALTH INTEGRATION --- */
+        .breathing-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--teal);
+        }
+
+        .circle-outer {
+            width: 120px; height: 120px;
+            background: var(--soft-teal);
+            border-radius: 50%;
+            margin: 1rem auto;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .circle-inner {
+            width: 60px; height: 60px;
+            background: var(--teal);
+            border-radius: 50%;
+            animation: breathe 8s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.6); opacity: 1; }
+        }
+
+        .mood-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 1rem 0;
+        }
+
+        .mood-box {
+            background: var(--light-blue);
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* --- BOTTOM NAV --- */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px; background: white;
+            display: flex; justify-content: space-around; padding: 12px 0 25px 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.08); border-radius: 25px 25px 0 0; z-index: 100;
+        }
+
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #A0AEC0; font-size: 0.65rem; font-weight: 600; }
+        .nav-item.active { color: var(--navy); }
+        .nav-icon { font-size: 1.4rem; }
+        .fab-container { position: relative; top: -35px; }
+        .fab-add {
+            width: 58px; height: 58px; background: var(--navy); color: white;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 1.8rem; border: 4px solid var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div style="margin-bottom: 1.5rem;">
+            <h2 style="font-size: 1.3rem;">Analisis AI & Pikiran</h2>
+            <p style="font-size: 0.8rem; color: var(--gray);">Keseimbangan fisik dan mental hari ini.</p>
+        </div>
+
+        <div class="ai-insight-card">
+            <span class="ai-badge">Insight AI</span>
+            <h3 style="font-size: 1rem; margin-bottom: 5px;">Glukosa Anda Stabil</h3>
+            <p style="font-size: 0.8rem; opacity: 0.9;">Pola makan rendah GI kemarin membantu menjaga kadar gula pagi ini di angka 105 mg/dL.</p>
+        </div>
+
+        <div class="chart-section">
+            <p style="font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">Tren Glukosa 7 Hari</p>
+            <canvas id="weeklyChart" height="180"></canvas>
+        </div>
+
+        <div class="score-row">
+            <div class="score-box">
+                <div class="score-circle">88%</div>
+                <span style="font-size: 0.7rem; color: var(--gray);">Time in Range</span>
+            </div>
+            <div class="score-box">
+                <div class="score-circle" style="border-top-color: var(--purple);">6.4</div>
+                <span style="font-size: 0.7rem; color: var(--gray);">Est. HbA1c</span>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <span>🧘‍♂️</span> Dukungan Mental AI
+        </div>
+        
+        <div class="breathing-card">
+            <p style="font-size: 0.85rem; font-weight: 600;">Latihan Pernapasan (1 Menit)</p>
+            <div class="circle-outer">
+                <div class="circle-inner"></div>
+            </div>
+            <p id="breatheText" style="font-weight: 700; color: var(--teal); margin-bottom: 5px;">Tarik Napas</p>
+            <p style="font-size: 0.7rem; color: var(--gray); margin-bottom: 1rem;">Membantu menurunkan hormon kortisol.</p>
+            
+            <p style="font-size: 0.8rem; font-weight: 700; text-align: left;">Mood Anda?</p>
+            <div class="mood-selection">
+                <div class="mood-box">😊 Senang</div>
+                <div class="mood-box">😐 Biasa</div>
+                <div class="mood-box">😟 Stres</div>
+            </div>
+        </div>
+
+        <div class="chart-section" onclick="window.location.href='adaptive-lifestyle-insight.html'" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.2rem;">🥗</span>
+                <span style="font-size: 0.8rem; font-weight: 600;">Lihat Rekomendasi Diet</span>
+            </div>
+            <span style="color: var(--gray);">›</span>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span>Beranda</span>
+        </a>
+        <a href="ai-diabetes-dashboard.html" class="nav-item active">
+            <span class="nav-icon">📊</span>
+            <span>Analisis</span>
+        </a>
+        <a href="manual-input-data.html" class="nav-item fab-container">
+            <div class="fab-add">+</div>
+        </a>
+        <a href="therapy-recommendations.html" class="nav-item">
+            <span class="nav-icon">🧘</span>
+            <span>Terapi</span>
+        </a>
+        <a href="user-profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span>Profil</span>
+        </a>
+    </nav>
+
+    <script>
+        // Chart Config
+        const ctx = document.getElementById('weeklyChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['S', 'S', 'R', 'K', 'J', 'S', 'M'],
+                datasets: [{
+                    data: [110, 105, 125, 98, 102, 115, 108],
+                    backgroundColor: '#001F3F',
+                    borderRadius: 5,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: false, display: false },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Breathing Text Toggle
+        const textEl = document.getElementById('breatheText');
+        setInterval(() => {
+            textEl.innerText = textEl.innerText === "Tarik Napas" ? "Hembuskan" : "Tarik Napas";
+        }, 4000);
+    </script>
+</body>
+</html>

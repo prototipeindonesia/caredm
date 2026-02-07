@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE-DM | Lifestyle Insight</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --white: #FFFFFF;
+            --light-blue: #F0F4F8;
+            --accent-blue: #0074D9;
+            --gray: #7F8C8D;
+            --green: #2ECC40;
+            --orange: #FF851B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--white);
+            color: var(--navy);
+            padding-bottom: 40px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Nav Header */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        /* Recommendation Hero */
+        .hero-insight {
+            background-color: var(--navy);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-insight h1 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-insight p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-insight::after {
+            content: '🥗';
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 5rem;
+            opacity: 0.1;
+        }
+
+        /* Category Sections */
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light-blue);
+            border-radius: 18px;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .card-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .card-info p {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* Checkbox List */
+        .todo-list {
+            margin-top: 1.5rem;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #EEE;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--navy);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .todo-text {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Action Button */
+        .btn-full {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--navy);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-header">
+            <a href="ai-diabetes-dashboard.html" class="back-btn">←</a>
+            <h2 style="font-size: 1.1rem;">Wawasan Gaya Hidup</h2>
+        </div>
+
+        <div class="hero-insight">
+            <h1>Rencana Makan Siang Anda</h1>
+            <p>Berdasarkan tren glukosa pagi ini, AI menyarankan asupan karbohidrat kompleks rendah GI untuk mencegah lonjakan di jam 2 siang.</p>
+        </div>
+
+        <h3 class="section-title"><span>🍽️</span> Nutrisi Adaptif</h3>
+        <div class="card-item">
+            <div class="card-icon">🍲</div>
+            <div class="card-info">
+                <h4>Quinoa & Ayam Panggang</h4>
+                <p>Porsi: 150g Quinoa + 100g Protein</p>
+            </div>
+        </div>
+        <div class="card-item">
+            <div class="card-icon">🍎</div>
+            <div class="card-info">
+                <h4>Apel Hijau</h4>
+                <p>Camilan ideal jika lapar sebelum jam 4 sore</p>
+            </div>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;"><span>👟</span> Aktivitas Fisik</h3>
+        <div class="card-item">
+            <div class="card-icon">🚶‍♂️</div>
+            <div class="card-info">
+                <h4>Jalan Cepat Pasca-Makan</h4>
+                <p>Durasi: 15 Menit • Intensitas: Ringan</p>
+            </div>
+        </div>
+
+        <div class="todo-list">
+            <h3 class="section-title">Target Hari Ini</h3>
+            <div class="todo-item">
+                <div class="checkbox"></div>
+                <span class="todo-text">Minum 2L air putih</span>
+            </div>
+            <div class="todo-item">
+                <div class="checkbox" style="background: var(--navy);"></div>
+                <span class="todo-text" style="text-decoration: line-through; opacity: 0.5;">Cek glukosa sebelum sarapan</span>
+            </div>
+            <div class="todo-item">
+                <div class="checkbox"></div>
+                <span class="todo-text">Hindari kafein setelah jam 6 sore</span>
+            </div>
+        </div>
+
+        <a href="dashboard.html" class="btn-full">Kembali ke Beranda</a>
+    </div>
+
+</body>
+</html>
